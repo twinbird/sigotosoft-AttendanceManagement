@@ -36,7 +36,9 @@
             txtName = new TextBox();
             lblName = new Label();
             gbEmployer = new GroupBox();
+            textBox1 = new TextBox();
             cbDisabled = new CheckBox();
+            lblMemo = new Label();
             btnRegist = new Button();
             btnDelete = new Button();
             gbDataManage = new GroupBox();
@@ -44,8 +46,6 @@
             btnCSVExport = new Button();
             epID = new ErrorProvider(components);
             epName = new ErrorProvider(components);
-            lblMemo = new Label();
-            textBox1 = new TextBox();
             epMemo = new ErrorProvider(components);
             gbEmployer.SuspendLayout();
             gbDataManage.SuspendLayout();
@@ -111,6 +111,14 @@
             gbEmployer.TabStop = false;
             gbEmployer.Text = "従業員情報";
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(86, 95);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(153, 70);
+            textBox1.TabIndex = 5;
+            // 
             // cbDisabled
             // 
             cbDisabled.AutoSize = true;
@@ -120,6 +128,15 @@
             cbDisabled.TabIndex = 4;
             cbDisabled.Text = "退職・入社前";
             cbDisabled.UseVisualStyleBackColor = true;
+            // 
+            // lblMemo
+            // 
+            lblMemo.AutoSize = true;
+            lblMemo.Location = new Point(13, 95);
+            lblMemo.Name = "lblMemo";
+            lblMemo.Size = new Size(24, 15);
+            lblMemo.TabIndex = 3;
+            lblMemo.Text = "メモ";
             // 
             // btnRegist
             // 
@@ -177,23 +194,6 @@
             // 
             epName.ContainerControl = this;
             // 
-            // lblMemo
-            // 
-            lblMemo.AutoSize = true;
-            lblMemo.Location = new Point(13, 95);
-            lblMemo.Name = "lblMemo";
-            lblMemo.Size = new Size(24, 15);
-            lblMemo.TabIndex = 3;
-            lblMemo.Text = "メモ";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(86, 95);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(153, 70);
-            textBox1.TabIndex = 5;
-            // 
             // epMemo
             // 
             epMemo.ContainerControl = this;
@@ -210,6 +210,7 @@
             Controls.Add(lbEmployers);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "EmployerManageForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "従業員の登録・編集";
             gbEmployer.ResumeLayout(false);
             gbEmployer.PerformLayout();

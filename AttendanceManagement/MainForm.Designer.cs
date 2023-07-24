@@ -97,7 +97,7 @@
             btnOpenExcelOutput.Name = "btnOpenExcelOutput";
             btnOpenExcelOutput.Size = new Size(109, 23);
             btnOpenExcelOutput.TabIndex = 4;
-            btnOpenExcelOutput.Text = "Excel・CSV出力";
+            btnOpenExcelOutput.Text = "勤怠の出力";
             btnOpenExcelOutput.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -124,7 +124,7 @@
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(704, 450);
+            ClientSize = new Size(704, 435);
             Controls.Add(btnOpenHistory);
             Controls.Add(btnOpenExcelOutput);
             Controls.Add(label1);

@@ -8,11 +8,11 @@ namespace AttendanceManagement
         }
 
         /// <summary>
-        /// 従業員の登録・編集ボタンをクリック
+        /// 従業員設定のメニューをクリック
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOpenEmployerManage_Click(object sender, EventArgs e)
+        private void 従業員設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 従業員の登録・編集フォームを呼び出す
             var dlg = new EmployerManageForm();
@@ -20,11 +20,11 @@ namespace AttendanceManagement
         }
 
         /// <summary>
-        /// 勤怠の履歴を確認ボタンをクリック
+        /// 勤怠履歴のメニューをクリック
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOpenHistory_Click(object sender, EventArgs e)
+        private void 勤怠履歴ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 勤怠履歴フォームを呼び出す
             var dlg = new HistoryForm();
@@ -32,11 +32,11 @@ namespace AttendanceManagement
         }
 
         /// <summary>
-        /// 勤怠の出力ボタンをクリック
+        /// 勤怠出力のメニューをクリック
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOpenExcelOutput_Click(object sender, EventArgs e)
+        private void 出力ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 勤怠の出力フォームを呼び出す
             var dlg = new AttendanceExportForm();

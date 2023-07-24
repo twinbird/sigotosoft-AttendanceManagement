@@ -79,7 +79,7 @@
             // lblRange
             // 
             lblRange.AutoSize = true;
-            lblRange.Location = new Point(45, 69);
+            lblRange.Location = new Point(45, 67);
             lblRange.Name = "lblRange";
             lblRange.Size = new Size(31, 15);
             lblRange.TabIndex = 1;

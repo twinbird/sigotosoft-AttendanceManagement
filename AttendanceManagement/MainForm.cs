@@ -30,5 +30,17 @@ namespace AttendanceManagement
             var dlg = new HistoryForm();
             dlg.ShowDialog();
         }
+
+        /// <summary>
+        /// 勤怠の出力ボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOpenExcelOutput_Click(object sender, EventArgs e)
+        {
+            // 勤怠の出力フォームを呼び出す
+            var dlg = new AttendanceExportForm();
+            dlg.ShowDialog();
+        }
     }
 }

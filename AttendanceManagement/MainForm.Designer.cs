@@ -99,6 +99,7 @@
             btnOpenExcelOutput.TabIndex = 5;
             btnOpenExcelOutput.Text = "勤怠の出力";
             btnOpenExcelOutput.UseVisualStyleBackColor = true;
+            btnOpenExcelOutput.Click += btnOpenExcelOutput_Click;
             // 
             // label1
             // 

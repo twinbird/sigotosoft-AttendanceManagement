@@ -47,6 +47,7 @@
             btnOpenEmployerManage.TabIndex = 0;
             btnOpenEmployerManage.Text = "従業員の登録・編集";
             btnOpenEmployerManage.UseVisualStyleBackColor = true;
+            btnOpenEmployerManage.Click += btnOpenEmployerManage_Click;
             // 
             // lbEmployers
             // 

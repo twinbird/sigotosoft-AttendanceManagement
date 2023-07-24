@@ -44,7 +44,7 @@
             btnOpenEmployerManage.Location = new Point(24, 400);
             btnOpenEmployerManage.Name = "btnOpenEmployerManage";
             btnOpenEmployerManage.Size = new Size(120, 23);
-            btnOpenEmployerManage.TabIndex = 0;
+            btnOpenEmployerManage.TabIndex = 3;
             btnOpenEmployerManage.Text = "従業員の登録・編集";
             btnOpenEmployerManage.UseVisualStyleBackColor = true;
             btnOpenEmployerManage.Click += btnOpenEmployerManage_Click;
@@ -56,7 +56,7 @@
             lbEmployers.Location = new Point(24, 12);
             lbEmployers.Name = "lbEmployers";
             lbEmployers.Size = new Size(240, 379);
-            lbEmployers.TabIndex = 1;
+            lbEmployers.TabIndex = 0;
             // 
             // btnStartWork
             // 
@@ -65,7 +65,7 @@
             btnStartWork.Location = new Point(287, 183);
             btnStartWork.Name = "btnStartWork";
             btnStartWork.Size = new Size(403, 101);
-            btnStartWork.TabIndex = 2;
+            btnStartWork.TabIndex = 1;
             btnStartWork.Text = "始業";
             btnStartWork.UseVisualStyleBackColor = true;
             // 
@@ -96,7 +96,7 @@
             btnOpenExcelOutput.Location = new Point(581, 400);
             btnOpenExcelOutput.Name = "btnOpenExcelOutput";
             btnOpenExcelOutput.Size = new Size(109, 23);
-            btnOpenExcelOutput.TabIndex = 4;
+            btnOpenExcelOutput.TabIndex = 5;
             btnOpenExcelOutput.Text = "勤怠の出力";
             btnOpenExcelOutput.UseVisualStyleBackColor = true;
             // 
@@ -116,7 +116,7 @@
             btnOpenHistory.Location = new Point(163, 400);
             btnOpenHistory.Name = "btnOpenHistory";
             btnOpenHistory.Size = new Size(101, 23);
-            btnOpenHistory.TabIndex = 5;
+            btnOpenHistory.TabIndex = 4;
             btnOpenHistory.Text = "勤怠履歴を確認";
             btnOpenHistory.UseVisualStyleBackColor = true;
             btnOpenHistory.Click += btnOpenHistory_Click;

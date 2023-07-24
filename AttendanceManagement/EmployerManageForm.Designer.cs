@@ -59,7 +59,7 @@
             txtID.Location = new Point(86, 27);
             txtID.Name = "txtID";
             txtID.Size = new Size(153, 23);
-            txtID.TabIndex = 1;
+            txtID.TabIndex = 0;
             // 
             // lbEmployers
             // 
@@ -68,7 +68,7 @@
             lbEmployers.Location = new Point(12, 12);
             lbEmployers.Name = "lbEmployers";
             lbEmployers.Size = new Size(253, 394);
-            lbEmployers.TabIndex = 2;
+            lbEmployers.TabIndex = 0;
             // 
             // lblID
             // 
@@ -107,7 +107,7 @@
             gbEmployer.Location = new Point(271, 12);
             gbEmployer.Name = "gbEmployer";
             gbEmployer.Size = new Size(271, 196);
-            gbEmployer.TabIndex = 4;
+            gbEmployer.TabIndex = 1;
             gbEmployer.TabStop = false;
             gbEmployer.Text = "従業員情報";
             // 
@@ -117,7 +117,7 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(153, 70);
-            textBox1.TabIndex = 5;
+            textBox1.TabIndex = 2;
             // 
             // cbDisabled
             // 
@@ -125,7 +125,7 @@
             cbDisabled.Location = new Point(86, 171);
             cbDisabled.Name = "cbDisabled";
             cbDisabled.Size = new Size(92, 19);
-            cbDisabled.TabIndex = 4;
+            cbDisabled.TabIndex = 3;
             cbDisabled.Text = "退職・入社前";
             cbDisabled.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +143,7 @@
             btnRegist.Location = new Point(449, 214);
             btnRegist.Name = "btnRegist";
             btnRegist.Size = new Size(93, 23);
-            btnRegist.TabIndex = 5;
+            btnRegist.TabIndex = 2;
             btnRegist.Text = "登録・更新";
             btnRegist.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +153,7 @@
             btnDelete.Location = new Point(271, 383);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(130, 23);
-            btnDelete.TabIndex = 6;
+            btnDelete.TabIndex = 4;
             btnDelete.Text = "選択中の従業員を削除";
             btnDelete.UseVisualStyleBackColor = true;
             // 
@@ -164,7 +164,7 @@
             gbDataManage.Location = new Point(271, 262);
             gbDataManage.Name = "gbDataManage";
             gbDataManage.Size = new Size(271, 102);
-            gbDataManage.TabIndex = 7;
+            gbDataManage.TabIndex = 3;
             gbDataManage.TabStop = false;
             gbDataManage.Text = "データの管理";
             // 
@@ -173,7 +173,7 @@
             btnCSVImport.Location = new Point(24, 59);
             btnCSVImport.Name = "btnCSVImport";
             btnCSVImport.Size = new Size(189, 23);
-            btnCSVImport.TabIndex = 8;
+            btnCSVImport.TabIndex = 1;
             btnCSVImport.Text = "CSVからインポート";
             btnCSVImport.UseVisualStyleBackColor = true;
             // 
@@ -182,7 +182,7 @@
             btnCSVExport.Location = new Point(24, 30);
             btnCSVExport.Name = "btnCSVExport";
             btnCSVExport.Size = new Size(189, 23);
-            btnCSVExport.TabIndex = 8;
+            btnCSVExport.TabIndex = 0;
             btnCSVExport.Text = "CSVでエクスポート";
             btnCSVExport.UseVisualStyleBackColor = true;
             // 
@@ -208,6 +208,7 @@
             Controls.Add(btnRegist);
             Controls.Add(gbEmployer);
             Controls.Add(lbEmployers);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "EmployerManageForm";
             StartPosition = FormStartPosition.CenterScreen;

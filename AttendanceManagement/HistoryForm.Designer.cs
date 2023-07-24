@@ -67,14 +67,14 @@
             dtpWorkStart.Location = new Point(82, 63);
             dtpWorkStart.Name = "dtpWorkStart";
             dtpWorkStart.Size = new Size(124, 23);
-            dtpWorkStart.TabIndex = 2;
+            dtpWorkStart.TabIndex = 1;
             // 
             // dtpWorkEnd
             // 
             dtpWorkEnd.Location = new Point(240, 63);
             dtpWorkEnd.Name = "dtpWorkEnd";
             dtpWorkEnd.Size = new Size(124, 23);
-            dtpWorkEnd.TabIndex = 3;
+            dtpWorkEnd.TabIndex = 2;
             // 
             // lblRange
             // 
@@ -97,7 +97,7 @@
             gbSearchQuery.Location = new Point(12, 12);
             gbSearchQuery.Name = "gbSearchQuery";
             gbSearchQuery.Size = new Size(451, 126);
-            gbSearchQuery.TabIndex = 4;
+            gbSearchQuery.TabIndex = 0;
             gbSearchQuery.TabStop = false;
             gbSearchQuery.Text = "検索";
             // 
@@ -106,7 +106,7 @@
             btnSearch.Location = new Point(370, 92);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
-            btnSearch.TabIndex = 5;
+            btnSearch.TabIndex = 3;
             btnSearch.Text = "検索";
             btnSearch.UseVisualStyleBackColor = true;
             // 
@@ -131,7 +131,7 @@
             dgvHistory.RowHeadersVisible = false;
             dgvHistory.RowTemplate.Height = 25;
             dgvHistory.Size = new Size(451, 478);
-            dgvHistory.TabIndex = 5;
+            dgvHistory.TabIndex = 1;
             // 
             // colWorkStart
             // 
@@ -163,8 +163,10 @@
             ClientSize = new Size(475, 634);
             Controls.Add(dgvHistory);
             Controls.Add(gbSearchQuery);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "HistoryForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "まるそふと-勤怠管理-勤怠履歴";
             gbSearchQuery.ResumeLayout(false);
             gbSearchQuery.PerformLayout();

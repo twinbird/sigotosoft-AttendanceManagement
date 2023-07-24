@@ -211,7 +211,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "EmployerManageForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "従業員の登録・編集";
+            Text = "まるそふと-勤怠管理-従業員の登録・編集";
             gbEmployer.ResumeLayout(false);
             gbEmployer.PerformLayout();
             gbDataManage.ResumeLayout(false);

@@ -18,5 +18,17 @@ namespace AttendanceManagement
             var dlg = new EmployerManageForm();
             dlg.ShowDialog();
         }
+
+        /// <summary>
+        /// 勤怠の履歴を確認ボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOpenHistory_Click(object sender, EventArgs e)
+        {
+            // 勤怠履歴フォームを呼び出す
+            var dlg = new HistoryForm();
+            dlg.ShowDialog();
+        }
     }
 }

@@ -119,6 +119,7 @@
             btnOpenHistory.TabIndex = 5;
             btnOpenHistory.Text = "勤怠履歴を確認";
             btnOpenHistory.UseVisualStyleBackColor = true;
+            btnOpenHistory.Click += btnOpenHistory_Click;
             // 
             // MainForm
             // 
@@ -137,7 +138,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "まるそふと-勤怠管理タイムカード";
+            Text = "まるそふと-勤怠管理-タイムカード";
             ResumeLayout(false);
             PerformLayout();
         }

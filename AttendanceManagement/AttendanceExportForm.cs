@@ -148,12 +148,12 @@ namespace AttendanceManagement
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    var row = new[]
+                    var row = new string[]
                     {
-                        dr["employee_id"].ToString(),
-                        dr["name"].ToString(),
-                        dr["work_start_date"].ToString(),
-                        dr["work_end_date"].ToString(),
+                        dr["employee_id"].ToString() ?? "",
+                        dr["name"].ToString() ?? "",
+                        dr["work_start_date"].ToString() ?? "",
+                        dr["work_end_date"].ToString() ?? "",
                     };
                     rowsList.Add(row);
                 }

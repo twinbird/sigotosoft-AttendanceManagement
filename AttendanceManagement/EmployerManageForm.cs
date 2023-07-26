@@ -526,10 +526,10 @@ namespace AttendanceManagement
             {
                 var row = new[]
                 {
-                    dr["id"].ToString(),
-                    dr["name"].ToString(),
-                    dr["memo"].ToString(),
-                    dr["is_disabled"].ToString(),
+                    dr["id"].ToString() ?? "",
+                    dr["name"].ToString() ?? "",
+                    dr["memo"].ToString() ?? "",
+                    dr["is_disabled"].ToString() ?? "",
                 };
                 rowsList.Add(row);
             }

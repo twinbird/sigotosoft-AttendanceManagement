@@ -5,7 +5,7 @@ namespace AttendanceManagement
     /// <summary>
     /// 設定ファイル管理
     /// </summary>
-    public class MalConfig
+    public class ConfigWrapper
     {
         /// <summary>
         /// データベースファイルへのファイルパスが記述されている設定ファイル(App.config)のキー
@@ -31,7 +31,7 @@ namespace AttendanceManagement
         /// コンストラクタ
         /// </summary>
         /// <param name="databaseFileName">このアプリケーションのデフォルトデータベースファイル名</param>
-        public MalConfig(string databaseFileName)
+        public ConfigWrapper(string databaseFileName)
         {
             mDefaultDatabaseFileName = databaseFileName;
         }

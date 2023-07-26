@@ -57,6 +57,7 @@ namespace AttendanceManagement
         {
             // 勤怠の出力フォームを呼び出す
             var dlg = new AttendanceExportForm();
+            dlg.configuration = mConfiguration;
             dlg.ShowDialog();
         }
 

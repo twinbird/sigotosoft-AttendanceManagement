@@ -53,6 +53,8 @@ namespace AttendanceManagement
             }
 
             exportCSV(sfd.FileName, dtpWorkStart.Value, dtpWorkEnd.Value);
+
+            MessageBox.Show("出力しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -112,7 +114,10 @@ namespace AttendanceManagement
             };
             var dt = db.ExecuteQuery(@"
                 SELECT
-                    *
+                     attendances.employee_id AS employee_id
+                    ,employees.name AS name
+                    ,attendances.work_start_date
+                    ,attendances.work_end_date
                 FROM
                     attendances
                 INNER JOIN
@@ -147,8 +152,8 @@ namespace AttendanceManagement
                     {
                         dr["employee_id"].ToString(),
                         dr["name"].ToString(),
-                        dr["work_start_time"].ToString(),
-                        dr["work_end_time"].ToString(),
+                        dr["work_start_date"].ToString(),
+                        dr["work_end_date"].ToString(),
                     };
                     rowsList.Add(row);
                 }
@@ -156,7 +161,6 @@ namespace AttendanceManagement
             var rows = rowsList;
             var csv = CsvWriter.WriteToText(columnNames, rows, ',');
             File.WriteAllText(savepath, csv);
-
         }
 
         #endregion

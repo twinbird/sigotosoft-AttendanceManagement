@@ -85,6 +85,33 @@ namespace AttendanceManagement
         }
 
         /// <summary>
+        /// 削除ボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lvEmployers.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            var id = lvEmployers.SelectedItems[0].Text;
+            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            {
+                return;
+            }
+
+            if (MessageBox.Show("本当に削除してもよろしいですか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+            {
+                return;
+            }
+
+            deleteEmployer(id);
+            resetInputForm();
+            loadEmployersList();
+        }
+
+        /// <summary>
         /// フォームロード時
         /// </summary>
         /// <param name="sender"></param>
@@ -393,6 +420,35 @@ namespace AttendanceManagement
 
             return ret;
         }
+
+        /// <summary>
+        /// 選択中の従業員を削除する
+        /// </summary>
+        /// <param name="id"></param>
+        private void deleteEmployer(string id)
+        {
+            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            {
+                return;
+            }
+
+            if (configuration == null)
+            {
+                MessageBox.Show("configuration is not set", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var db = new SQLiteADOWrapper(configuration.getDBFilePath());
+
+            var param = new Dictionary<string, object> { { "id", id } };
+            db.ExecuteNonQuery(@"
+                DELETE
+                FROM
+                    employers
+                WHERE
+                    id = $id", param);
+        }
+
 
         #endregion
 

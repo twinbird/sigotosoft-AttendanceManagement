@@ -130,6 +130,7 @@
             btnDelete.TabIndex = 4;
             btnDelete.Text = "削除";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnRegist
             // 

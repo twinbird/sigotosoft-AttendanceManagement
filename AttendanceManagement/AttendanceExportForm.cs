@@ -44,7 +44,7 @@ namespace AttendanceManagement
         private void btnExportCSV_Click(object sender, EventArgs e)
         {
             var sfd = new SaveFileDialog();
-            sfd.FileName = "勤怠.csv";
+            sfd.FileName = exportDefaultFileName(dtpWorkStart.Value, dtpWorkEnd.Value) + ".csv";
             sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             sfd.Title = "保存先を指定してください。";
             sfd.FilterIndex = 2;
@@ -67,7 +67,7 @@ namespace AttendanceManagement
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             var sfd = new SaveFileDialog();
-            sfd.FileName = "勤怠.xlsx";
+            sfd.FileName = exportDefaultFileName(dtpWorkStart.Value, dtpWorkEnd.Value) + ".xlsx";
             sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             sfd.Title = "保存先を指定してください。";
             sfd.FilterIndex = 2;
@@ -214,6 +214,19 @@ namespace AttendanceManagement
 
         }
 
+        /// <summary>
+        /// エクスポート時のデフォルトファイル名を返す
+        /// </summary>
+        /// <param name="work_start_date"></param>
+        /// <param name="work_end_date"></param>
+        /// <returns></returns>
+        private string exportDefaultFileName(DateTime work_start_date, DateTime work_end_date)
+        {
+            var ss = work_start_date.ToString("M");
+            var es = work_end_date.ToString("M");
+
+            return "勤怠" + ss + "～" + es;
+        }
 
         #endregion
 

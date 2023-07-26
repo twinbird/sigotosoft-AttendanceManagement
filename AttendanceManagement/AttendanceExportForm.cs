@@ -200,18 +200,78 @@ namespace AttendanceManagement
             IWorkbook workbook = new XSSFWorkbook();
             ISheet sheet = workbook.CreateSheet("Sheet1");
 
+            // ヘッダ行
+            setExcelRowHeader(sheet);
 
-            IRow row = sheet.CreateRow(0);
-            ICell cell = row.CreateCell(0);
-            cell.SetCellType(CellType.String);
-            cell.SetCellValue("Hello, Excel!");
-
+            if (dt != null)
+            {
+                var idx = 1;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    setExcelRowBody(sheet, dr, idx);
+                    idx++;
+                }
+            }
 
             using (FileStream fs = File.Create(savepath))
             {
                 workbook.Write(fs);
             }
 
+        }
+
+        /// <summary>
+        /// Excelエクスポートの行ヘッダを設定する
+        /// </summary>
+        /// <param name="sheet"></param>
+        private void setExcelRowHeader(ISheet sheet)
+        {
+            IRow row = sheet.CreateRow(0);
+            ICell idCell = row.CreateCell(0);
+            idCell.SetCellType(CellType.String);
+            idCell.SetCellValue("従業員ID");
+
+            ICell nameCell = row.CreateCell(1);
+            nameCell.SetCellType(CellType.String);
+            nameCell.SetCellValue("名前");
+
+            ICell workStartDateCell = row.CreateCell(2);
+            workStartDateCell.SetCellType(CellType.String);
+            workStartDateCell.SetCellValue("出勤日時");
+
+            ICell workEndDateCell = row.CreateCell(3);
+            workEndDateCell.SetCellType(CellType.String);
+            workEndDateCell.SetCellValue("退勤日時");
+        }
+
+        /// <summary>
+        /// Excelエクスポートのデータ行を設定する
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="row"></param>
+        private void setExcelRowBody(ISheet sheet, DataRow dr, int idx)
+        {
+            IRow row = sheet.CreateRow(idx);
+
+            // 従業員ID
+            ICell idCell = row.CreateCell(0);
+            idCell.SetCellType(CellType.String);
+            idCell.SetCellValue(dr[0].ToString());
+
+            // 名前
+            ICell nameCell = row.CreateCell(1);
+            nameCell.SetCellType(CellType.String);
+            nameCell.SetCellValue(dr[1].ToString());
+
+            // 出勤日時
+            ICell workStartDateCell = row.CreateCell(2);
+            workStartDateCell.SetCellType(CellType.String);
+            workStartDateCell.SetCellValue(dr[2].ToString());
+
+            // 退勤日時
+            ICell workEndDateCell = row.CreateCell(3);
+            workEndDateCell.SetCellType(CellType.String);
+            workEndDateCell.SetCellValue(dr[3].ToString());
         }
 
         /// <summary>

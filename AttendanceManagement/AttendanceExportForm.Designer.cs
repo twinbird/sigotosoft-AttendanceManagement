@@ -102,6 +102,7 @@
             btnExportExcel.TabIndex = 1;
             btnExportExcel.Text = "Excelで出力";
             btnExportExcel.UseVisualStyleBackColor = true;
+            btnExportExcel.Click += btnExportExcel_Click;
             // 
             // AttendanceExportForm
             // 

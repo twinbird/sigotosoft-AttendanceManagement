@@ -9,13 +9,13 @@ namespace AttendanceManagement
         /// <summary>
         /// 設定ファイル情報
         /// </summary>
-        private MalConfig mConfiguration;
+        private ConfigWrapper mConfiguration;
 
         public MainForm()
         {
             InitializeComponent();
 
-            mConfiguration = new MalConfig("AttendanceManagement.sqlite3");
+            mConfiguration = new ConfigWrapper("AttendanceManagement.sqlite3");
         }
 
         #region "イベント"

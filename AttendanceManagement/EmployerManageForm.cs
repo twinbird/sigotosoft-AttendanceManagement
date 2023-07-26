@@ -14,7 +14,7 @@ namespace AttendanceManagement
         /// <summary>
         /// 設定ファイル情報のプロパティ
         /// </summary>
-        public MalConfig? configuration { get; set; }
+        public ConfigWrapper? configuration { get; set; }
 
         #endregion
 

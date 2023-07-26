@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
-            cbEmployer = new ComboBox();
-            lblEmployer = new Label();
+            cbemployee = new ComboBox();
+            lblemployee = new Label();
             dtpWorkStart = new DateTimePicker();
             dtpWorkEnd = new DateTimePicker();
             lblRange = new Label();
@@ -45,22 +45,22 @@
             ((System.ComponentModel.ISupportInitialize)dgvHistory).BeginInit();
             SuspendLayout();
             // 
-            // cbEmployer
+            // cbemployee
             // 
-            cbEmployer.FormattingEnabled = true;
-            cbEmployer.Location = new Point(82, 26);
-            cbEmployer.Name = "cbEmployer";
-            cbEmployer.Size = new Size(282, 23);
-            cbEmployer.TabIndex = 0;
+            cbemployee.FormattingEnabled = true;
+            cbemployee.Location = new Point(82, 26);
+            cbemployee.Name = "cbemployee";
+            cbemployee.Size = new Size(282, 23);
+            cbemployee.TabIndex = 0;
             // 
-            // lblEmployer
+            // lblemployee
             // 
-            lblEmployer.AutoSize = true;
-            lblEmployer.Location = new Point(33, 29);
-            lblEmployer.Name = "lblEmployer";
-            lblEmployer.Size = new Size(43, 15);
-            lblEmployer.TabIndex = 1;
-            lblEmployer.Text = "従業員";
+            lblemployee.AutoSize = true;
+            lblemployee.Location = new Point(33, 29);
+            lblemployee.Name = "lblemployee";
+            lblemployee.Size = new Size(43, 15);
+            lblemployee.TabIndex = 1;
+            lblemployee.Text = "従業員";
             // 
             // dtpWorkStart
             // 
@@ -89,9 +89,9 @@
             // 
             gbSearchQuery.Controls.Add(btnSearch);
             gbSearchQuery.Controls.Add(dtpWorkEnd);
-            gbSearchQuery.Controls.Add(cbEmployer);
+            gbSearchQuery.Controls.Add(cbemployee);
             gbSearchQuery.Controls.Add(dtpWorkStart);
-            gbSearchQuery.Controls.Add(lblEmployer);
+            gbSearchQuery.Controls.Add(lblemployee);
             gbSearchQuery.Controls.Add(lblRangeMark);
             gbSearchQuery.Controls.Add(lblRange);
             gbSearchQuery.Location = new Point(12, 12);
@@ -176,8 +176,8 @@
 
         #endregion
 
-        private ComboBox cbEmployer;
-        private Label lblEmployer;
+        private ComboBox cbemployee;
+        private Label lblemployee;
         private DateTimePicker dtpWorkStart;
         private DateTimePicker dtpWorkEnd;
         private Label lblRange;

@@ -116,9 +116,9 @@ namespace AttendanceManagement
                 FROM
                     attendances
                 INNER JOIN
-                    employers
+                    employees
                 ON
-                    employers.id = attendances.employer_id
+                    employees.id = attendances.employee_id
                 WHERE
                     $work_start_date <= work_start_date
                 AND
@@ -145,7 +145,7 @@ namespace AttendanceManagement
                 {
                     var row = new[]
                     {
-                        dr["employer_id"].ToString(),
+                        dr["employee_id"].ToString(),
                         dr["name"].ToString(),
                         dr["work_start_time"].ToString(),
                         dr["work_end_time"].ToString(),

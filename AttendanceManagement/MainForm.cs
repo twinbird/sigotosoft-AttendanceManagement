@@ -28,12 +28,12 @@ namespace AttendanceManagement
         private void 従業員設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 従業員の登録・編集フォームを呼び出す
-            var dlg = new EmployerManageForm();
+            var dlg = new employeeManageForm();
             dlg.configuration = mConfiguration;
             dlg.ShowDialog();
 
             // 従業員情報を読み直す
-            loadEmployersList();
+            loademployeesList();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace AttendanceManagement
         /// <param name="e"></param>
         private void btnStartWork_Click(object sender, EventArgs e)
         {
-            var id = lvEmployers.SelectedItems[0].Text;
+            var id = lvemployees.SelectedItems[0].Text;
             registAttendance(id);
             changeAttendanceButtonEnable();
         }
@@ -79,7 +79,7 @@ namespace AttendanceManagement
         /// <param name="e"></param>
         private void btnEndWork_Click(object sender, EventArgs e)
         {
-            var id = lvEmployers.SelectedItems[0].Text;
+            var id = lvemployees.SelectedItems[0].Text;
             registLeave(id);
             changeAttendanceButtonEnable();
         }
@@ -93,7 +93,7 @@ namespace AttendanceManagement
         {
             execDDL();
             initForm();
-            loadEmployersList();
+            loademployeesList();
         }
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lvEmployers_SelectedIndexChanged(object sender, EventArgs e)
+        private void lvemployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvEmployers.SelectedIndices.Count == 0)
+            if (lvemployees.SelectedIndices.Count == 0)
             {
                 return;
             }
@@ -141,7 +141,7 @@ namespace AttendanceManagement
 
             /* 従業員テーブル */
             db.ExecuteNonQuery(@"
-                CREATE TABLE IF NOT EXISTS employers (
+                CREATE TABLE IF NOT EXISTS employees (
 	                 id TEXT PRIMARY KEY
 	                ,name TEXT NOT NULL
                     ,memo TEXT
@@ -154,7 +154,7 @@ namespace AttendanceManagement
             db.ExecuteNonQuery(@"
                 CREATE TABLE IF NOT EXISTS attendances (
                      id INTEGER PRIMARY KEY AUTOINCREMENT
-	                ,employer_id TEXT NOT NULL
+	                ,employee_id TEXT NOT NULL
 	                ,work_start_date TEXT NOT NULL
 	                ,work_end_date TEXT
 	                ,created_at TEXT
@@ -168,7 +168,7 @@ namespace AttendanceManagement
         private void initForm()
         {
             displayClock();
-            initEmployersListViewColumn();
+            initemployeesListViewColumn();
         }
 
         /// <summary>
@@ -183,26 +183,26 @@ namespace AttendanceManagement
         /// <summary>
         /// 従業員情報のリストビューを初期化する
         /// </summary>
-        private void initEmployersListViewColumn()
+        private void initemployeesListViewColumn()
         {
             // リストビューのヘッダ設定
-            lvEmployers.Columns.Add("ID", 68, HorizontalAlignment.Left);
-            lvEmployers.Columns.Add("名前", 180, HorizontalAlignment.Left);
+            lvemployees.Columns.Add("ID", 68, HorizontalAlignment.Left);
+            lvemployees.Columns.Add("名前", 180, HorizontalAlignment.Left);
         }
 
         /// <summary>
         /// 従業員情報をリストビューへ読みだす
         /// </summary>
-        private void loadEmployersList()
+        private void loademployeesList()
         {
-            lvEmployers.Items.Clear();
+            lvemployees.Items.Clear();
 
             var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
             var dt = db.ExecuteQuery(@"
                 SELECT
                     *
                 FROM
-                    employers
+                    employees
                 ORDER BY
                     id");
             if (dt == null)
@@ -212,7 +212,7 @@ namespace AttendanceManagement
 
             foreach (DataRow dr in dt.Rows)
             {
-                var row = lvEmployers.Items.Add(dr["id"].ToString());
+                var row = lvemployees.Items.Add(dr["id"].ToString());
                 row.SubItems.Add(dr["name"].ToString());
             }
         }
@@ -232,7 +232,7 @@ namespace AttendanceManagement
                 FROM
                     attendances
                 WHERE
-                    employer_id = $id
+                    employee_id = $id
                 ORDER BY
                      work_start_date DESC
                 LIMIT 1", param);
@@ -249,7 +249,7 @@ namespace AttendanceManagement
         /// </summary>
         private void changeAttendanceButtonEnable()
         {
-            var id = lvEmployers.SelectedItems[0].Text;
+            var id = lvemployees.SelectedItems[0].Text;
             var latestRec = getLatestAttendance(id);
             if (latestRec == null)
             {
@@ -281,16 +281,16 @@ namespace AttendanceManagement
         {
             var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
             var param = new Dictionary<string, object>() { 
-                { "employer_id", id },
+                { "employee_id", id },
             };
             var ret = db.ExecuteNonQuery(@"
                 INSERT INTO attendances (
-                     employer_id
+                     employee_id
                     ,work_start_date
                     ,created_at
                     ,updated_at
                 ) VALUES (
-                     $employer_id
+                     $employee_id
                     ,datetime('now', 'localtime')
                     ,datetime('now', 'localtime')
                     ,datetime('now', 'localtime')
@@ -323,7 +323,7 @@ namespace AttendanceManagement
 
             var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
             var param = new Dictionary<string, object>() {
-                { "employer_id", id },
+                { "employee_id", id },
                 { "id", attendance_id },
             };
             var ret = db.ExecuteNonQuery(@"
@@ -334,7 +334,7 @@ namespace AttendanceManagement
                 WHERE
                     id = $id
                 AND
-                    employer_id = $employer_id
+                    employee_id = $employee_id
                 ", param);
             if (ret == -1)
             {

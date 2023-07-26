@@ -39,7 +39,7 @@
             勤怠履歴ToolStripMenuItem = new ToolStripMenuItem();
             出力ToolStripMenuItem = new ToolStripMenuItem();
             tiUpdateClock = new System.Windows.Forms.Timer(components);
-            lvEmployers = new ListView();
+            lvemployees = new ListView();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -127,26 +127,26 @@
             tiUpdateClock.Interval = 1000;
             tiUpdateClock.Tick += tiUpdateClock_Tick;
             // 
-            // lvEmployers
+            // lvemployees
             // 
-            lvEmployers.BorderStyle = BorderStyle.FixedSingle;
-            lvEmployers.FullRowSelect = true;
-            lvEmployers.GridLines = true;
-            lvEmployers.Location = new Point(12, 29);
-            lvEmployers.MultiSelect = false;
-            lvEmployers.Name = "lvEmployers";
-            lvEmployers.Size = new Size(252, 371);
-            lvEmployers.TabIndex = 7;
-            lvEmployers.UseCompatibleStateImageBehavior = false;
-            lvEmployers.View = View.Details;
-            lvEmployers.SelectedIndexChanged += lvEmployers_SelectedIndexChanged;
+            lvemployees.BorderStyle = BorderStyle.FixedSingle;
+            lvemployees.FullRowSelect = true;
+            lvemployees.GridLines = true;
+            lvemployees.Location = new Point(12, 29);
+            lvemployees.MultiSelect = false;
+            lvemployees.Name = "lvemployees";
+            lvemployees.Size = new Size(252, 371);
+            lvemployees.TabIndex = 7;
+            lvemployees.UseCompatibleStateImageBehavior = false;
+            lvemployees.View = View.Details;
+            lvemployees.SelectedIndexChanged += lvemployees_SelectedIndexChanged;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(704, 412);
-            Controls.Add(lvEmployers);
+            Controls.Add(lvemployees);
             Controls.Add(label1);
             Controls.Add(lblCurrentTime);
             Controls.Add(btnEndWork);
@@ -175,6 +175,6 @@
         private ToolStripMenuItem 勤怠履歴ToolStripMenuItem;
         private ToolStripMenuItem 出力ToolStripMenuItem;
         private System.Windows.Forms.Timer tiUpdateClock;
-        private ListView lvEmployers;
+        private ListView lvemployees;
     }
 }

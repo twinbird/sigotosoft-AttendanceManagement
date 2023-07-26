@@ -7,7 +7,7 @@ namespace AttendanceManagement
     /// <summary>
     /// 従業員の登録・編集フォーム
     /// </summary>
-    public partial class EmployerManageForm : Form
+    public partial class employeeManageForm : Form
     {
         #region "プロパティ"
 
@@ -23,12 +23,12 @@ namespace AttendanceManagement
         /// <summary>
         /// 従業員情報のリストビューの新規追加用行の名前の値
         /// </summary>
-        const string EMPLOYERS_NEW_USER_ROW_NAME_VALUE = "<新規追加>";
+        const string employeeS_NEW_USER_ROW_NAME_VALUE = "<新規追加>";
 
         /// <summary>
         /// 従業員情報のリストビューの新規追加用行のIDの値
         /// </summary>
-        const string EMPLOYERS_NEW_USER_ROW_ID_VALUE = "";
+        const string employeeS_NEW_USER_ROW_ID_VALUE = "";
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace AttendanceManagement
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EmployerManageForm()
+        public employeeManageForm()
         {
             InitializeComponent();
         }
@@ -53,14 +53,14 @@ namespace AttendanceManagement
         /// <param name="e"></param>
         private void btnRegist_Click(object sender, EventArgs e)
         {
-            if (lvEmployers.SelectedItems.Count == 0)
+            if (lvemployees.SelectedItems.Count == 0)
             {
                 return;
             }
-            var id = lvEmployers.SelectedItems[0].Text;
+            var id = lvemployees.SelectedItems[0].Text;
 
             // 入力検証
-            if (validateEmployerInfo(id) == false)
+            if (validateemployeeInfo(id) == false)
             {
                 return;
             }
@@ -71,19 +71,19 @@ namespace AttendanceManagement
             param["memo"] = txtMemo.Text;
             param["is_disabled"] = cbDisabled.Checked ? 1 : 0;
 
-            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            if (id == employeeS_NEW_USER_ROW_ID_VALUE)
             {
-                insertEmployerInfo(param);
+                insertemployeeInfo(param);
             }
             else
             {
-                updateEmployerInfo(id, param);
+                updateemployeeInfo(id, param);
             }
 
             MessageBox.Show("登録しました", "メッセージ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // リストビュー更新
-            loadEmployersList();
+            loademployeesList();
         }
 
         /// <summary>
@@ -93,12 +93,12 @@ namespace AttendanceManagement
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lvEmployers.SelectedItems.Count == 0)
+            if (lvemployees.SelectedItems.Count == 0)
             {
                 return;
             }
-            var id = lvEmployers.SelectedItems[0].Text;
-            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            var id = lvemployees.SelectedItems[0].Text;
+            if (id == employeeS_NEW_USER_ROW_ID_VALUE)
             {
                 return;
             }
@@ -108,9 +108,9 @@ namespace AttendanceManagement
                 return;
             }
 
-            deleteEmployer(id);
+            deleteemployee(id);
             resetInputForm();
-            loadEmployersList();
+            loademployeesList();
         }
 
         /// <summary>
@@ -118,10 +118,10 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EmployerManageForm_Load(object sender, EventArgs e)
+        private void employeeManageForm_Load(object sender, EventArgs e)
         {
-            initEmployersListViewColumn();
-            loadEmployersList();
+            initemployeesListViewColumn();
+            loademployeesList();
         }
 
         /// <summary>
@@ -129,14 +129,14 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lvEmployers_SelectedIndexChanged(object sender, EventArgs e)
+        private void lvemployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvEmployers.SelectedItems.Count == 0)
+            if (lvemployees.SelectedItems.Count == 0)
             {
                 return;
             }
-            var id = lvEmployers.SelectedItems[0];
-            loadEmployerInfo(id.Text);
+            var id = lvemployees.SelectedItems[0];
+            loademployeeInfo(id.Text);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace AttendanceManagement
             }
 
             importCSV(ofd.FileName);
-            loadEmployersList();
+            loademployeesList();
         }
 
         #endregion
@@ -191,22 +191,22 @@ namespace AttendanceManagement
         /// <summary>
         /// 従業員情報のリストビューを初期化する
         /// </summary>
-        private void initEmployersListViewColumn()
+        private void initemployeesListViewColumn()
         {
             // リストビューのヘッダ設定
-            lvEmployers.Columns.Add("ID", 68, HorizontalAlignment.Left);
-            lvEmployers.Columns.Add("名前", 180, HorizontalAlignment.Left);
+            lvemployees.Columns.Add("ID", 68, HorizontalAlignment.Left);
+            lvemployees.Columns.Add("名前", 180, HorizontalAlignment.Left);
         }
 
         /// <summary>
         /// 従業員情報をリストビューへ読みだす
         /// </summary>
-        private void loadEmployersList()
+        private void loademployeesList()
         {
-            lvEmployers.Items.Clear();
+            lvemployees.Items.Clear();
 
             // 新規追加用の行
-            lvEmployers.Items.Add(EMPLOYERS_NEW_USER_ROW_ID_VALUE).SubItems.Add(EMPLOYERS_NEW_USER_ROW_NAME_VALUE);
+            lvemployees.Items.Add(employeeS_NEW_USER_ROW_ID_VALUE).SubItems.Add(employeeS_NEW_USER_ROW_NAME_VALUE);
 
             if (configuration == null)
             {
@@ -219,7 +219,7 @@ namespace AttendanceManagement
                 SELECT
                     *
                 FROM
-                    employers
+                    employees
                 ORDER BY
                     id");
             if (dt == null)
@@ -229,12 +229,12 @@ namespace AttendanceManagement
 
             foreach (DataRow dr in dt.Rows)
             {
-                var row = lvEmployers.Items.Add(dr["id"].ToString());
+                var row = lvemployees.Items.Add(dr["id"].ToString());
                 row.SubItems.Add(dr["name"].ToString());
             }
 
             // 新規追加用の行をアクティブにしておく
-            lvEmployers.Items[0].Selected = true;
+            lvemployees.Items[0].Selected = true;
         }
 
         /// <summary>
@@ -247,17 +247,17 @@ namespace AttendanceManagement
             txtMemo.Text = "";
             cbDisabled.Checked = false;
 
-            resetValidateEmployerInfo();
+            resetValidateemployeeInfo();
         }
 
         /// <summary>
         /// リストビューで選択されている従業員情報を入力欄へ表示する
         /// </summary>
-        private void loadEmployerInfo(string id)
+        private void loademployeeInfo(string id)
         {
             resetInputForm();
 
-            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            if (id == employeeS_NEW_USER_ROW_ID_VALUE)
             {
                 return;
             }
@@ -275,7 +275,7 @@ namespace AttendanceManagement
                 SELECT
                     *
                 FROM
-                    employers
+                    employees
                 WHERE
                     id = $id", param);
             if (dt == null)
@@ -296,7 +296,7 @@ namespace AttendanceManagement
         /// 入力フォームの内容を登録する
         /// </summary>
         /// <param name="param"></param>
-        private void insertEmployerInfo(Dictionary<string, object> param)
+        private void insertemployeeInfo(Dictionary<string, object> param)
         {
             if (configuration == null)
             {
@@ -306,7 +306,7 @@ namespace AttendanceManagement
 
             var db = new SQLiteADOWrapper(configuration.getDBFilePath());
             db.ExecuteNonQuery(@"
-                INSERT INTO employers (
+                INSERT INTO employees (
                      id
                     ,name
                     ,memo
@@ -328,7 +328,7 @@ namespace AttendanceManagement
         /// 入力フォームの内容で更新する
         /// </summary>
         /// <param name="param"></param>
-        private void updateEmployerInfo(string id, Dictionary<string, object> param)
+        private void updateemployeeInfo(string id, Dictionary<string, object> param)
         {
             if (configuration == null)
             {
@@ -339,7 +339,7 @@ namespace AttendanceManagement
             param.Add("old_id", id);
             var db = new SQLiteADOWrapper(configuration.getDBFilePath());
             db.ExecuteNonQuery(@"
-                UPDATE employers
+                UPDATE employees
                 SET
                      id = $id
                     ,name = $name
@@ -355,7 +355,7 @@ namespace AttendanceManagement
         /// 登録済みの従業員IDならtrue
         /// </summary>
         /// <param name="id"></param>
-        private bool isExistEmployerID(string id)
+        private bool isExistemployeeID(string id)
         {
             if (configuration == null)
             {
@@ -369,7 +369,7 @@ namespace AttendanceManagement
                 SELECT
                     *
                 FROM
-                    employers
+                    employees
                 WHERE
                     id = $id", param);
             if (dt == null)
@@ -390,27 +390,27 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="current_id"></param>
         /// <returns></returns>
-        private bool validateEmployerID(string current_id)
+        private bool validateemployeeID(string current_id)
         {
             // ID未入力はエラー
             if (txtID.Text == "")
             {
-                epEmployerInfo.SetError(txtID, "従業員IDは必ず入力してください");
+                epemployeeInfo.SetError(txtID, "従業員IDは必ず入力してください");
                 return false;
             }
 
             // ID登録済みならエラー: 新規の場合
-            if (current_id == EMPLOYERS_NEW_USER_ROW_ID_VALUE && isExistEmployerID(txtID.Text))
+            if (current_id == employeeS_NEW_USER_ROW_ID_VALUE && isExistemployeeID(txtID.Text))
             {
-                epEmployerInfo.SetError(txtID, "すでに登録されている従業員IDです。");
+                epemployeeInfo.SetError(txtID, "すでに登録されている従業員IDです。");
                 return false;
             }
             // ID登録済みならエラー: 更新の場合(ID変更の場合)
-            if (current_id != EMPLOYERS_NEW_USER_ROW_ID_VALUE &&
+            if (current_id != employeeS_NEW_USER_ROW_ID_VALUE &&
                 current_id != txtID.Text &&
-                isExistEmployerID(txtID.Text))
+                isExistemployeeID(txtID.Text))
             {
-                epEmployerInfo.SetError(txtID, "すでに登録されている従業員IDです。");
+                epemployeeInfo.SetError(txtID, "すでに登録されている従業員IDです。");
                 return false;
             }
             return true;
@@ -421,12 +421,12 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="current_id"></param>
         /// <returns></returns>
-        private bool validateEmployerName()
+        private bool validateemployeeName()
         {
             // 名前未入力はエラー
             if (txtName.Text == "")
             {
-                epEmployerInfo.SetError(txtName, "名前は必ず入力してください");
+                epemployeeInfo.SetError(txtName, "名前は必ず入力してください");
                 return false;
             }
             return true;
@@ -435,10 +435,10 @@ namespace AttendanceManagement
         /// <summary>
         /// エラー表示をリセットする
         /// </summary>
-        private void resetValidateEmployerInfo()
+        private void resetValidateemployeeInfo()
         {
-            epEmployerInfo.SetError(txtID, null);
-            epEmployerInfo.SetError(txtName, null);
+            epemployeeInfo.SetError(txtID, null);
+            epemployeeInfo.SetError(txtName, null);
         }
 
         /// <summary>
@@ -446,21 +446,21 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="current_id"></param>
         /// <returns></returns>
-        private bool validateEmployerInfo(string current_id)
+        private bool validateemployeeInfo(string current_id)
         {
             // 一度クリア
-            resetValidateEmployerInfo();
+            resetValidateemployeeInfo();
 
             var ret = true;
 
             // 従業員ID
-            if (validateEmployerID(current_id) == false)
+            if (validateemployeeID(current_id) == false)
             {
                 ret = false;
             }
 
             // 名前
-            if (validateEmployerName() == false)
+            if (validateemployeeName() == false)
             {
                 ret = false;
             }
@@ -472,9 +472,9 @@ namespace AttendanceManagement
         /// 選択中の従業員を削除する
         /// </summary>
         /// <param name="id"></param>
-        private void deleteEmployer(string id)
+        private void deleteemployee(string id)
         {
-            if (id == EMPLOYERS_NEW_USER_ROW_ID_VALUE)
+            if (id == employeeS_NEW_USER_ROW_ID_VALUE)
             {
                 return;
             }
@@ -491,7 +491,7 @@ namespace AttendanceManagement
             db.ExecuteNonQuery(@"
                 DELETE
                 FROM
-                    employers
+                    employees
                 WHERE
                     id = $id", param);
         }
@@ -512,7 +512,7 @@ namespace AttendanceManagement
                 SELECT
                     *
                 FROM
-                    employers
+                    employees
                 ORDER BY
                     id");
             if (dt == null)
@@ -563,31 +563,31 @@ namespace AttendanceManagement
         /// <summary>
         /// CSVファイル1行の内容を検証する
         /// </summary>
-        /// <param name="employers"></param>
+        /// <param name="employees"></param>
         /// <returns></returns>
-        private bool validateImportEmployer(Dictionary<string, string> employer)
+        private bool validateImportemployee(Dictionary<string, string> employee)
         {
-            if (employer == null) { return false; }
+            if (employee == null) { return false; }
 
             // IDが11文字以上
-            if (employer["id"].Length > 10)
+            if (employee["id"].Length > 10)
             {
                 return false;
             }
 
             // 名前が空
-            if (employer["name"].Length == 0)
+            if (employee["name"].Length == 0)
             {
                 return false;
             }
             // 名前が51文字以上
-            if (employer["name"].Length > 50)
+            if (employee["name"].Length > 50)
             {
                 return false;
             }
 
             // メモが1000文字以上
-            if (employer["memo"].Length > 1000)
+            if (employee["memo"].Length > 1000)
             {
                 return false;
             }
@@ -598,31 +598,31 @@ namespace AttendanceManagement
         /// <summary>
         /// CSVファイル1行の内容を登録する
         /// </summary>
-        /// <param name="employer"></param>
-        private void insertImportEmployer(Dictionary<string, string> employer)
+        /// <param name="employee"></param>
+        private void insertImportemployee(Dictionary<string, string> employee)
         {
             var emp = new Dictionary<string, object>();
-            emp["id"] = employer["id"];
-            emp["name"] = employer["name"];
-            emp["memo"] = employer["memo"];
-            emp["is_disabled"] = employer["is_disabled"] == "1" ? 1 : 0;
-            insertEmployerInfo(emp);
+            emp["id"] = employee["id"];
+            emp["name"] = employee["name"];
+            emp["memo"] = employee["memo"];
+            emp["is_disabled"] = employee["is_disabled"] == "1" ? 1 : 0;
+            insertemployeeInfo(emp);
         }
 
         /// <summary>
         /// CSVファイル1行の内容を更新する
         /// </summary>
-        /// <param name="employer"></param>
-        private void updateImportEmployer(Dictionary<string, string> employer)
+        /// <param name="employee"></param>
+        private void updateImportemployee(Dictionary<string, string> employee)
         {
             var emp = new Dictionary<string, object>();
-            emp["id"] = employer["id"];
-            emp["name"] = employer["name"];
-            emp["memo"] = employer["memo"];
-            emp["is_disabled"] = employer["is_disabled"] == "1" ? 1 : 0;
+            emp["id"] = employee["id"];
+            emp["name"] = employee["name"];
+            emp["memo"] = employee["memo"];
+            emp["is_disabled"] = employee["is_disabled"] == "1" ? 1 : 0;
 
-            var id = employer["id"];
-            updateEmployerInfo(id, emp);
+            var id = employee["id"];
+            updateemployeeInfo(id, emp);
         }
 
         /// <summary>
@@ -639,18 +639,18 @@ namespace AttendanceManagement
                 {
                     continue;
                 }
-                if (validateImportEmployer(row) == false)
+                if (validateImportemployee(row) == false)
                 {
                     errorList.Add("従業員ID: " + row["id"] + "は不正な入力のためスキップされました。\n");
                     continue;
                 }
-                if (isExistEmployerID(row["id"]))
+                if (isExistemployeeID(row["id"]))
                 {
-                    updateImportEmployer(row);
+                    updateImportemployee(row);
                 }
                 else
                 {
-                    insertImportEmployer(row);
+                    insertImportemployee(row);
                 }
             }
 

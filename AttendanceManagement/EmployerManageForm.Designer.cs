@@ -1,6 +1,6 @@
 ﻿namespace AttendanceManagement
 {
-    partial class EmployerManageForm
+    partial class employeeManageForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployerManageForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(employeeManageForm));
             txtID = new TextBox();
             lblID = new Label();
             txtName = new TextBox();
             lblName = new Label();
-            gbEmployer = new GroupBox();
+            gbemployee = new GroupBox();
             txtMemo = new TextBox();
             cbDisabled = new CheckBox();
             btnDelete = new Button();
@@ -43,11 +43,11 @@
             gbDataManage = new GroupBox();
             btnCSVImport = new Button();
             btnCSVExport = new Button();
-            lvEmployers = new ListView();
-            epEmployerInfo = new ErrorProvider(components);
-            gbEmployer.SuspendLayout();
+            lvemployees = new ListView();
+            epemployeeInfo = new ErrorProvider(components);
+            gbemployee.SuspendLayout();
             gbDataManage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)epEmployerInfo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)epemployeeInfo).BeginInit();
             SuspendLayout();
             // 
             // txtID
@@ -84,23 +84,23 @@
             lblName.TabIndex = 3;
             lblName.Text = "名前";
             // 
-            // gbEmployer
+            // gbemployee
             // 
-            gbEmployer.Controls.Add(txtMemo);
-            gbEmployer.Controls.Add(cbDisabled);
-            gbEmployer.Controls.Add(btnDelete);
-            gbEmployer.Controls.Add(btnRegist);
-            gbEmployer.Controls.Add(txtName);
-            gbEmployer.Controls.Add(lblMemo);
-            gbEmployer.Controls.Add(lblName);
-            gbEmployer.Controls.Add(txtID);
-            gbEmployer.Controls.Add(lblID);
-            gbEmployer.Location = new Point(271, 12);
-            gbEmployer.Name = "gbEmployer";
-            gbEmployer.Size = new Size(278, 220);
-            gbEmployer.TabIndex = 1;
-            gbEmployer.TabStop = false;
-            gbEmployer.Text = "従業員情報";
+            gbemployee.Controls.Add(txtMemo);
+            gbemployee.Controls.Add(cbDisabled);
+            gbemployee.Controls.Add(btnDelete);
+            gbemployee.Controls.Add(btnRegist);
+            gbemployee.Controls.Add(txtName);
+            gbemployee.Controls.Add(lblMemo);
+            gbemployee.Controls.Add(lblName);
+            gbemployee.Controls.Add(txtID);
+            gbemployee.Controls.Add(lblID);
+            gbemployee.Location = new Point(271, 12);
+            gbemployee.Name = "gbemployee";
+            gbemployee.Size = new Size(278, 220);
+            gbemployee.TabIndex = 1;
+            gbemployee.TabStop = false;
+            gbemployee.Text = "従業員情報";
             // 
             // txtMemo
             // 
@@ -182,42 +182,42 @@
             btnCSVExport.UseVisualStyleBackColor = true;
             btnCSVExport.Click += btnCSVExport_Click;
             // 
-            // lvEmployers
+            // lvemployees
             // 
-            lvEmployers.FullRowSelect = true;
-            lvEmployers.GridLines = true;
-            lvEmployers.Location = new Point(12, 16);
-            lvEmployers.MultiSelect = false;
-            lvEmployers.Name = "lvEmployers";
-            lvEmployers.Size = new Size(253, 390);
-            lvEmployers.TabIndex = 5;
-            lvEmployers.UseCompatibleStateImageBehavior = false;
-            lvEmployers.View = View.Details;
-            lvEmployers.SelectedIndexChanged += lvEmployers_SelectedIndexChanged;
+            lvemployees.FullRowSelect = true;
+            lvemployees.GridLines = true;
+            lvemployees.Location = new Point(12, 16);
+            lvemployees.MultiSelect = false;
+            lvemployees.Name = "lvemployees";
+            lvemployees.Size = new Size(253, 390);
+            lvemployees.TabIndex = 5;
+            lvemployees.UseCompatibleStateImageBehavior = false;
+            lvemployees.View = View.Details;
+            lvemployees.SelectedIndexChanged += lvemployees_SelectedIndexChanged;
             // 
-            // epEmployerInfo
+            // epemployeeInfo
             // 
-            epEmployerInfo.BlinkStyle = ErrorBlinkStyle.NeverBlink;
-            epEmployerInfo.ContainerControl = this;
+            epemployeeInfo.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            epemployeeInfo.ContainerControl = this;
             // 
-            // EmployerManageForm
+            // employeeManageForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(554, 414);
-            Controls.Add(lvEmployers);
+            Controls.Add(lvemployees);
             Controls.Add(gbDataManage);
-            Controls.Add(gbEmployer);
+            Controls.Add(gbemployee);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "EmployerManageForm";
+            Name = "employeeManageForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "まるそふと-勤怠管理-従業員の登録・編集";
-            Load += EmployerManageForm_Load;
-            gbEmployer.ResumeLayout(false);
-            gbEmployer.PerformLayout();
+            Load += employeeManageForm_Load;
+            gbemployee.ResumeLayout(false);
+            gbemployee.PerformLayout();
             gbDataManage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)epEmployerInfo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)epemployeeInfo).EndInit();
             ResumeLayout(false);
         }
 
@@ -226,7 +226,7 @@
         private Label lblID;
         private TextBox txtName;
         private Label lblName;
-        private GroupBox gbEmployer;
+        private GroupBox gbemployee;
         private CheckBox cbDisabled;
         private Button btnRegist;
         private Button btnDelete;
@@ -235,7 +235,7 @@
         private Button btnCSVExport;
         private Label lblMemo;
         private TextBox txtMemo;
-        private ListView lvEmployers;
-        private ErrorProvider epEmployerInfo;
+        private ListView lvemployees;
+        private ErrorProvider epemployeeInfo;
     }
 }

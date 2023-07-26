@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            lbEmployers = new ListBox();
             btnStartWork = new Button();
             lblCurrentTime = new Label();
             btnEndWork = new Button();
@@ -38,27 +38,21 @@
             従業員設定ToolStripMenuItem = new ToolStripMenuItem();
             勤怠履歴ToolStripMenuItem = new ToolStripMenuItem();
             出力ToolStripMenuItem = new ToolStripMenuItem();
+            tiUpdateClock = new System.Windows.Forms.Timer(components);
+            lvEmployers = new ListView();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
-            // lbEmployers
-            // 
-            lbEmployers.FormattingEnabled = true;
-            lbEmployers.ItemHeight = 15;
-            lbEmployers.Location = new Point(24, 51);
-            lbEmployers.Name = "lbEmployers";
-            lbEmployers.Size = new Size(240, 349);
-            lbEmployers.TabIndex = 0;
-            // 
             // btnStartWork
             // 
+            btnStartWork.Enabled = false;
             btnStartWork.Font = new Font("Yu Gothic UI", 48F, FontStyle.Bold, GraphicsUnit.Point);
             btnStartWork.ForeColor = Color.Green;
             btnStartWork.Location = new Point(287, 192);
             btnStartWork.Name = "btnStartWork";
             btnStartWork.Size = new Size(403, 101);
             btnStartWork.TabIndex = 1;
-            btnStartWork.Text = "始業";
+            btnStartWork.Text = "出勤";
             btnStartWork.UseVisualStyleBackColor = true;
             btnStartWork.Click += btnStartWork_Click;
             // 
@@ -67,22 +61,24 @@
             lblCurrentTime.AutoSize = true;
             lblCurrentTime.Font = new Font("Yu Gothic UI", 72F, FontStyle.Bold, GraphicsUnit.Point);
             lblCurrentTime.ForeColor = SystemColors.Highlight;
-            lblCurrentTime.Location = new Point(375, 61);
+            lblCurrentTime.Location = new Point(305, 61);
             lblCurrentTime.Name = "lblCurrentTime";
-            lblCurrentTime.Size = new Size(234, 128);
+            lblCurrentTime.Size = new Size(402, 128);
             lblCurrentTime.TabIndex = 3;
-            lblCurrentTime.Text = "7:30";
+            lblCurrentTime.Text = "17:30:03";
             // 
             // btnEndWork
             // 
+            btnEndWork.Enabled = false;
             btnEndWork.Font = new Font("Yu Gothic UI", 48F, FontStyle.Bold, GraphicsUnit.Point);
             btnEndWork.ForeColor = Color.Red;
             btnEndWork.Location = new Point(287, 299);
             btnEndWork.Name = "btnEndWork";
             btnEndWork.Size = new Size(403, 101);
             btnEndWork.TabIndex = 2;
-            btnEndWork.Text = "終業";
+            btnEndWork.Text = "退勤";
             btnEndWork.UseVisualStyleBackColor = true;
+            btnEndWork.Click += btnEndWork_Click;
             // 
             // label1
             // 
@@ -125,16 +121,36 @@
             出力ToolStripMenuItem.Text = "勤怠出力";
             出力ToolStripMenuItem.Click += 出力ToolStripMenuItem_Click;
             // 
+            // tiUpdateClock
+            // 
+            tiUpdateClock.Enabled = true;
+            tiUpdateClock.Interval = 1000;
+            tiUpdateClock.Tick += tiUpdateClock_Tick;
+            // 
+            // lvEmployers
+            // 
+            lvEmployers.BorderStyle = BorderStyle.FixedSingle;
+            lvEmployers.FullRowSelect = true;
+            lvEmployers.GridLines = true;
+            lvEmployers.Location = new Point(12, 29);
+            lvEmployers.MultiSelect = false;
+            lvEmployers.Name = "lvEmployers";
+            lvEmployers.Size = new Size(252, 371);
+            lvEmployers.TabIndex = 7;
+            lvEmployers.UseCompatibleStateImageBehavior = false;
+            lvEmployers.View = View.Details;
+            lvEmployers.SelectedIndexChanged += lvEmployers_SelectedIndexChanged;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(704, 412);
+            Controls.Add(lvEmployers);
             Controls.Add(label1);
             Controls.Add(lblCurrentTime);
             Controls.Add(btnEndWork);
             Controls.Add(btnStartWork);
-            Controls.Add(lbEmployers);
             Controls.Add(menuMain);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -150,7 +166,6 @@
         }
 
         #endregion
-        private ListBox lbEmployers;
         private Button btnStartWork;
         private Label lblCurrentTime;
         private Button btnEndWork;
@@ -159,5 +174,7 @@
         private ToolStripMenuItem 従業員設定ToolStripMenuItem;
         private ToolStripMenuItem 勤怠履歴ToolStripMenuItem;
         private ToolStripMenuItem 出力ToolStripMenuItem;
+        private System.Windows.Forms.Timer tiUpdateClock;
+        private ListView lvEmployers;
     }
 }

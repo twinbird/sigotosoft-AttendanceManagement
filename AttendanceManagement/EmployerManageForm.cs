@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using Csv;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
 
 namespace AttendanceManagement
 {
@@ -135,6 +137,51 @@ namespace AttendanceManagement
             }
             var id = lvEmployers.SelectedItems[0];
             loadEmployerInfo(id.Text);
+        }
+
+        /// <summary>
+        /// CSVエクスポートボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCSVExport_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.FileName = "従業員情報.csv";
+            sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            sfd.Title = "保存先を指定してください。";
+            sfd.FilterIndex = 2;
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            exportCSV(sfd.FileName);
+        }
+
+        /// <summary>
+        /// CSVインポートボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCSVImport_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.DefaultExt = ".csv";
+            ofd.Title = "インポートするファイルを指定してください";
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (MessageBox.Show("従業員IDが登録済みのものは上書きされます。\n従業員IDの列が空の行は無視されます。\n本当にインポートしますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+            {
+                return;
+            }
+
+            importCSV(ofd.FileName);
+            loadEmployersList();
         }
 
         #endregion
@@ -449,6 +496,175 @@ namespace AttendanceManagement
                     id = $id", param);
         }
 
+        /// <summary>
+        /// 従業員情報をCSVでエクスポートする
+        /// </summary>
+        private void exportCSV(string filepath)
+        {
+            if (configuration == null)
+            {
+                MessageBox.Show("configuration is not set", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var db = new SQLiteADOWrapper(configuration.getDBFilePath());
+            var dt = db.ExecuteQuery(@"
+                SELECT
+                    *
+                FROM
+                    employers
+                ORDER BY
+                    id");
+            if (dt == null)
+            {
+                return;
+            }
+
+            var columnNames = new[] { "従業員ID", "名前", "メモ", "無効" };
+            var rowsList = new List<string[]>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                var row = new[]
+                {
+                    dr["id"].ToString(),
+                    dr["name"].ToString(),
+                    dr["memo"].ToString(),
+                    dr["is_disabled"].ToString(),
+                };
+                rowsList.Add(row);
+            }
+            var rows = rowsList;
+            var csv = CsvWriter.WriteToText(columnNames, rows, ',');
+            File.WriteAllText(filepath, csv);
+        }
+
+        /// <summary>
+        /// CSVファイルを読みだしてディクショナリのリストにして返す
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        private List<Dictionary<string, string>> csv2Dict(string filepath)
+        {
+            var csv = File.ReadAllText(filepath);
+            var ret = new List<Dictionary<string, string>>();
+            foreach (var line in CsvReader.ReadFromText(csv))
+            {
+                var dict = new Dictionary<string, string>();
+                dict["id"] = line[0];
+                dict["name"] = line[1];
+                dict["memo"] = line[2];
+                dict["is_disabled"] = line[3];
+
+                ret.Add(dict);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// CSVファイル1行の内容を検証する
+        /// </summary>
+        /// <param name="employers"></param>
+        /// <returns></returns>
+        private bool validateImportEmployer(Dictionary<string, string> employer)
+        {
+            if (employer == null) { return false; }
+
+            // IDが11文字以上
+            if (employer["id"].Length > 10)
+            {
+                return false;
+            }
+
+            // 名前が空
+            if (employer["name"].Length == 0)
+            {
+                return false;
+            }
+            // 名前が51文字以上
+            if (employer["name"].Length > 50)
+            {
+                return false;
+            }
+
+            // メモが1000文字以上
+            if (employer["memo"].Length > 1000)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// CSVファイル1行の内容を登録する
+        /// </summary>
+        /// <param name="employer"></param>
+        private void insertImportEmployer(Dictionary<string, string> employer)
+        {
+            var emp = new Dictionary<string, object>();
+            emp["id"] = employer["id"];
+            emp["name"] = employer["name"];
+            emp["memo"] = employer["memo"];
+            emp["is_disabled"] = employer["is_disabled"] == "1" ? 1 : 0;
+            insertEmployerInfo(emp);
+        }
+
+        /// <summary>
+        /// CSVファイル1行の内容を更新する
+        /// </summary>
+        /// <param name="employer"></param>
+        private void updateImportEmployer(Dictionary<string, string> employer)
+        {
+            var emp = new Dictionary<string, object>();
+            emp["id"] = employer["id"];
+            emp["name"] = employer["name"];
+            emp["memo"] = employer["memo"];
+            emp["is_disabled"] = employer["is_disabled"] == "1" ? 1 : 0;
+
+            var id = employer["id"];
+            updateEmployerInfo(id, emp);
+        }
+
+        /// <summary>
+        /// 従業員情報をCSVからインポートする
+        /// </summary>
+        /// <param name="filepath"></param>
+        private void importCSV(string filepath)
+        {
+            var dat = csv2Dict(filepath);
+            var errorList = new List<string>();
+            foreach (var row in dat)
+            {
+                if (row["id"] == "")
+                {
+                    continue;
+                }
+                if (validateImportEmployer(row) == false)
+                {
+                    errorList.Add("従業員ID: " + row["id"] + "は不正な入力のためスキップされました。\n");
+                    continue;
+                }
+                if (isExistEmployerID(row["id"]))
+                {
+                    updateImportEmployer(row);
+                }
+                else
+                {
+                    insertImportEmployer(row);
+                }
+            }
+
+            if (errorList.Count > 0)
+            {
+                var message = "";
+                foreach (var error in errorList)
+                {
+                    message += error;
+                }
+
+                MessageBox.Show(message);
+            }
+        }
 
         #endregion
 

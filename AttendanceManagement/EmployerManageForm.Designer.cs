@@ -105,7 +105,7 @@
             // txtMemo
             // 
             txtMemo.Location = new Point(72, 85);
-            txtMemo.MaxLength = 3000;
+            txtMemo.MaxLength = 1000;
             txtMemo.Multiline = true;
             txtMemo.Name = "txtMemo";
             txtMemo.Size = new Size(179, 70);
@@ -170,6 +170,7 @@
             btnCSVImport.TabIndex = 1;
             btnCSVImport.Text = "CSVからインポート";
             btnCSVImport.UseVisualStyleBackColor = true;
+            btnCSVImport.Click += btnCSVImport_Click;
             // 
             // btnCSVExport
             // 
@@ -179,6 +180,7 @@
             btnCSVExport.TabIndex = 0;
             btnCSVExport.Text = "CSVでエクスポート";
             btnCSVExport.UseVisualStyleBackColor = true;
+            btnCSVExport.Click += btnCSVExport_Click;
             // 
             // lvEmployers
             // 

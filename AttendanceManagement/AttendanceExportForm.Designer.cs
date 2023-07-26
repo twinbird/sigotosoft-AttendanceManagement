@@ -92,6 +92,7 @@
             btnExportCSV.TabIndex = 2;
             btnExportCSV.Text = "CSVで出力";
             btnExportCSV.UseVisualStyleBackColor = true;
+            btnExportCSV.Click += btnExportCSV_Click;
             // 
             // btnExportExcel
             // 
@@ -115,6 +116,7 @@
             Name = "AttendanceExportForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "勤怠の出力";
+            Load += AttendanceExportForm_Load;
             gbSearchQuery.ResumeLayout(false);
             gbSearchQuery.PerformLayout();
             ResumeLayout(false);

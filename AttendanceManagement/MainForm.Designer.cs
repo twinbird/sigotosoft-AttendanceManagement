@@ -38,7 +38,6 @@
             従業員設定ToolStripMenuItem = new ToolStripMenuItem();
             勤怠履歴ToolStripMenuItem = new ToolStripMenuItem();
             出力ToolStripMenuItem = new ToolStripMenuItem();
-            設定ToolStripMenuItem = new ToolStripMenuItem();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,6 +60,7 @@
             btnStartWork.TabIndex = 1;
             btnStartWork.Text = "始業";
             btnStartWork.UseVisualStyleBackColor = true;
+            btnStartWork.Click += btnStartWork_Click;
             // 
             // lblCurrentTime
             // 
@@ -97,7 +97,7 @@
             // 
             // menuMain
             // 
-            menuMain.Items.AddRange(new ToolStripItem[] { 従業員設定ToolStripMenuItem, 勤怠履歴ToolStripMenuItem, 出力ToolStripMenuItem, 設定ToolStripMenuItem });
+            menuMain.Items.AddRange(new ToolStripItem[] { 従業員設定ToolStripMenuItem, 勤怠履歴ToolStripMenuItem, 出力ToolStripMenuItem });
             menuMain.Location = new Point(0, 0);
             menuMain.Name = "menuMain";
             menuMain.Size = new Size(704, 24);
@@ -125,12 +125,6 @@
             出力ToolStripMenuItem.Text = "勤怠出力";
             出力ToolStripMenuItem.Click += 出力ToolStripMenuItem_Click;
             // 
-            // 設定ToolStripMenuItem
-            // 
-            設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            設定ToolStripMenuItem.Size = new Size(43, 20);
-            設定ToolStripMenuItem.Text = "設定";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -148,6 +142,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "まるそふと-勤怠管理-タイムカード";
+            Load += MainForm_Load;
             menuMain.ResumeLayout(false);
             menuMain.PerformLayout();
             ResumeLayout(false);
@@ -161,7 +156,6 @@
         private Button btnEndWork;
         private Label label1;
         private MenuStrip menuMain;
-        private ToolStripMenuItem 設定ToolStripMenuItem;
         private ToolStripMenuItem 従業員設定ToolStripMenuItem;
         private ToolStripMenuItem 勤怠履歴ToolStripMenuItem;
         private ToolStripMenuItem 出力ToolStripMenuItem;

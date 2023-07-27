@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Reflection;
 
 namespace AttendanceManagement
 {
@@ -15,7 +16,12 @@ namespace AttendanceManagement
         /// <summary>
         /// デフォルトのデータベースディレクトリ名(%USERPROFILE%\AppData\Local以下のディレクトリ)
         /// </summary>
-        const string mDefaultDatabaseFileDirName = "mal_soft";
+        const string mDefaultDatabaseFileDirName = "sigoto_soft";
+
+        /// <summary>
+        /// デフォルトのデータベースディレクトリ名(%USERPROFILE%\AppData\Local\sigoto_soft以下のディレクトリ)
+        /// </summary>
+        const string mDefaultDatabaseFileDirProjectName = "AttendanceManagement";
 
         /// <summary>
         /// データベースファイルへのパス
@@ -65,7 +71,9 @@ namespace AttendanceManagement
         private string initializeDBFilePath()
         {
             // データベースファイルの保存先ディレクトリを作成
-            var defaultDirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), mDefaultDatabaseFileDirName);
+            var defaultDirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+                mDefaultDatabaseFileDirName,
+                mDefaultDatabaseFileDirProjectName);
             Directory.CreateDirectory(defaultDirPath);
 
             // データベースファイルへのパスを作成

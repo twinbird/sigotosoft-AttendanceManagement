@@ -73,7 +73,7 @@
             lblRange.Name = "lblRange";
             lblRange.Size = new Size(43, 15);
             lblRange.TabIndex = 5;
-            lblRange.Text = "始業日";
+            lblRange.Text = "出勤日";
             // 
             // lblRangeMark
             // 

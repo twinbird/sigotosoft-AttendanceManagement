@@ -127,7 +127,7 @@
             btnDelete.Location = new Point(13, 192);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(76, 23);
-            btnDelete.TabIndex = 4;
+            btnDelete.TabIndex = 5;
             btnDelete.Text = "削除";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
@@ -137,7 +137,7 @@
             btnRegist.Location = new Point(172, 192);
             btnRegist.Name = "btnRegist";
             btnRegist.Size = new Size(93, 23);
-            btnRegist.TabIndex = 2;
+            btnRegist.TabIndex = 4;
             btnRegist.Text = "登録";
             btnRegist.UseVisualStyleBackColor = true;
             btnRegist.Click += btnRegist_Click;
@@ -158,7 +158,7 @@
             gbDataManage.Location = new Point(271, 300);
             gbDataManage.Name = "gbDataManage";
             gbDataManage.Size = new Size(278, 102);
-            gbDataManage.TabIndex = 3;
+            gbDataManage.TabIndex = 2;
             gbDataManage.TabStop = false;
             gbDataManage.Text = "データの管理";
             // 
@@ -190,7 +190,7 @@
             lvemployees.MultiSelect = false;
             lvemployees.Name = "lvemployees";
             lvemployees.Size = new Size(253, 390);
-            lvemployees.TabIndex = 5;
+            lvemployees.TabIndex = 0;
             lvemployees.UseCompatibleStateImageBehavior = false;
             lvemployees.View = View.Details;
             lvemployees.SelectedIndexChanged += lvemployees_SelectedIndexChanged;
@@ -212,7 +212,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "employeeManageForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "まるそふと-勤怠管理-従業員の登録・編集";
+            Text = "しごとソフト【勤怠管理】-従業員の登録・編集";
             Load += employeeManageForm_Load;
             gbemployee.ResumeLayout(false);
             gbemployee.PerformLayout();

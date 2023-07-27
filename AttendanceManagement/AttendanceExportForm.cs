@@ -48,6 +48,8 @@ namespace AttendanceManagement
             sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             sfd.Title = "保存先を指定してください。";
             sfd.FilterIndex = 2;
+            sfd.Filter = "CSVファイル(*.csv)|*.csv";
+
 
             if (sfd.ShowDialog() != DialogResult.OK)
             {
@@ -71,6 +73,7 @@ namespace AttendanceManagement
             sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             sfd.Title = "保存先を指定してください。";
             sfd.FilterIndex = 2;
+            sfd.Filter = "Excelファイル(*.xlsx)|*.xlsx";
 
             if (sfd.ShowDialog() != DialogResult.OK)
             {
@@ -134,8 +137,8 @@ namespace AttendanceManagement
 
             var db = new SQLiteADOWrapper(configuration.getDBFilePath());
             var param = new Dictionary<string, object>() {
-                { "work_start_date", startDate.ToString("yyyy-MM-dd HH:mm:ss") },
-                { "work_end_date", endDate.ToString("yyyy-MM-dd HH:mm:ss") }
+                { "work_start_date", Utils.startTime(startDate) },
+                { "work_end_date", Utils.endTime(endDate) }
             };
             var dt = db.ExecuteQuery(@"
                 SELECT

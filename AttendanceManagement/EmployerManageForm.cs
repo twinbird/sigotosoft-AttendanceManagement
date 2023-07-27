@@ -1,4 +1,5 @@
 ﻿using Csv;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 
@@ -151,6 +152,7 @@ namespace AttendanceManagement
             sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             sfd.Title = "保存先を指定してください。";
             sfd.FilterIndex = 2;
+            sfd.Filter = "CSVファイル(*.csv)|*.csv";
 
             if (sfd.ShowDialog() != DialogResult.OK)
             {
@@ -170,6 +172,9 @@ namespace AttendanceManagement
             var ofd = new OpenFileDialog();
             ofd.DefaultExt = ".csv";
             ofd.Title = "インポートするファイルを指定してください";
+            ofd.FilterIndex = 2;
+            ofd.Filter = "CSVファイル(*.csv)|*.csv";
+
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 return;

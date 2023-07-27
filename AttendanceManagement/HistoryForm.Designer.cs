@@ -40,13 +40,16 @@
             dgvHistory = new DataGridView();
             colWorkStart = new DataGridViewTextBoxColumn();
             colWorkEnd = new DataGridViewTextBoxColumn();
-            colEdit = new DataGridViewButtonColumn();
+            colId = new DataGridViewTextBoxColumn();
+            btnOpenAddForm = new Button();
+            btnDelete = new Button();
             gbSearchQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistory).BeginInit();
             SuspendLayout();
             // 
             // cbemployee
             // 
+            cbemployee.DropDownStyle = ComboBoxStyle.DropDownList;
             cbemployee.FormattingEnabled = true;
             cbemployee.Location = new Point(82, 26);
             cbemployee.Name = "cbemployee";
@@ -109,6 +112,7 @@
             btnSearch.TabIndex = 3;
             btnSearch.Text = "検索";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // lblRangeMark
             // 
@@ -124,50 +128,79 @@
             dgvHistory.AllowUserToAddRows = false;
             dgvHistory.AllowUserToDeleteRows = false;
             dgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistory.Columns.AddRange(new DataGridViewColumn[] { colWorkStart, colWorkEnd, colEdit });
+            dgvHistory.Columns.AddRange(new DataGridViewColumn[] { colWorkStart, colWorkEnd, colId });
             dgvHistory.Location = new Point(12, 144);
             dgvHistory.Name = "dgvHistory";
             dgvHistory.ReadOnly = true;
             dgvHistory.RowHeadersVisible = false;
             dgvHistory.RowTemplate.Height = 25;
-            dgvHistory.Size = new Size(451, 478);
-            dgvHistory.TabIndex = 1;
+            dgvHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvHistory.Size = new Size(451, 447);
+            dgvHistory.TabIndex = 0;
             // 
             // colWorkStart
             // 
-            colWorkStart.HeaderText = "始業日時";
+            colWorkStart.DataPropertyName = "work_start_date";
+            colWorkStart.HeaderText = "出勤日時";
             colWorkStart.Name = "colWorkStart";
             colWorkStart.ReadOnly = true;
-            colWorkStart.Width = 195;
+            colWorkStart.Width = 215;
             // 
             // colWorkEnd
             // 
-            colWorkEnd.HeaderText = "終業日時";
+            colWorkEnd.DataPropertyName = "work_end_date";
+            colWorkEnd.HeaderText = "退勤日時";
             colWorkEnd.Name = "colWorkEnd";
             colWorkEnd.ReadOnly = true;
-            colWorkEnd.Width = 195;
+            colWorkEnd.Width = 215;
             // 
-            // colEdit
+            // colId
             // 
-            colEdit.HeaderText = "";
-            colEdit.Name = "colEdit";
-            colEdit.ReadOnly = true;
-            colEdit.Text = "編集";
-            colEdit.UseColumnTextForButtonValue = true;
-            colEdit.Width = 58;
+            colId.DataPropertyName = "id";
+            colId.HeaderText = "";
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            colId.Resizable = DataGridViewTriState.True;
+            colId.SortMode = DataGridViewColumnSortMode.NotSortable;
+            colId.Visible = false;
+            colId.Width = 5;
+            // 
+            // btnOpenAddForm
+            // 
+            btnOpenAddForm.Location = new Point(388, 599);
+            btnOpenAddForm.Name = "btnOpenAddForm";
+            btnOpenAddForm.Size = new Size(75, 23);
+            btnOpenAddForm.TabIndex = 2;
+            btnOpenAddForm.Text = "追加";
+            btnOpenAddForm.UseVisualStyleBackColor = true;
+            btnOpenAddForm.Click += btnOpenAddForm_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.ForeColor = Color.Red;
+            btnDelete.Location = new Point(12, 599);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "削除";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // HistoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(475, 634);
+            Controls.Add(btnDelete);
+            Controls.Add(btnOpenAddForm);
             Controls.Add(dgvHistory);
             Controls.Add(gbSearchQuery);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "HistoryForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "まるそふと-勤怠管理-勤怠履歴";
+            Text = "しごとソフト【勤怠管理】-勤怠履歴";
+            Load += HistoryForm_Load;
             gbSearchQuery.ResumeLayout(false);
             gbSearchQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistory).EndInit();
@@ -185,8 +218,10 @@
         private Label lblRangeMark;
         private Button btnSearch;
         private DataGridView dgvHistory;
+        private Button btnOpenAddForm;
+        private Button btnDelete;
         private DataGridViewTextBoxColumn colWorkStart;
         private DataGridViewTextBoxColumn colWorkEnd;
-        private DataGridViewButtonColumn colEdit;
+        private DataGridViewTextBoxColumn colId;
     }
 }

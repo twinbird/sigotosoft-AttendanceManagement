@@ -50,6 +50,7 @@ namespace AttendanceManagement
         {
             // 勤怠履歴フォームを呼び出す
             var dlg = new HistoryForm();
+            dlg.configuration = mConfiguration;
             dlg.ShowDialog();
         }
 
@@ -266,6 +267,8 @@ namespace AttendanceManagement
                     *
                 FROM
                     employees
+                WHERE
+                    is_disabled = 0
                 ORDER BY
                     id");
             if (dt == null)

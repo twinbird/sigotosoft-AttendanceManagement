@@ -168,7 +168,7 @@
             MainMenuStrip = menuMain;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "まるそふと-勤怠管理-タイムカード";
+            Text = "しごとソフト【勤怠管理】-タイムカード";
             Load += MainForm_Load;
             menuMain.ResumeLayout(false);
             menuMain.PerformLayout();

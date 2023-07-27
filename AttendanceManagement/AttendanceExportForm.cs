@@ -1,16 +1,8 @@
 ﻿using Csv;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace AttendanceManagement
 {
@@ -211,7 +203,7 @@ namespace AttendanceManagement
                 var idx = 1;
                 foreach (DataRow dr in dt.Rows)
                 {
-                    setExcelRowBody(sheet, dr, idx);
+                    setExcelRowBody(workbook, sheet, dr, idx);
                     idx++;
                 }
             }
@@ -252,9 +244,17 @@ namespace AttendanceManagement
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="row"></param>
-        private void setExcelRowBody(ISheet sheet, DataRow dr, int idx)
+        private void setExcelRowBody(IWorkbook book, ISheet sheet, DataRow dr, int idx)
         {
             IRow row = sheet.CreateRow(idx);
+
+            var workStartDate = dr[2].ToString() ?? "";
+            var workEndDate = dr[3].ToString() ?? "";
+
+            // 日付書式設定
+            var format = book.CreateDataFormat();
+            var style = book.CreateCellStyle();
+            style.DataFormat = format.GetFormat("yyyy年MM月dd日HH時mm分ss秒");
 
             // 従業員ID
             ICell idCell = row.CreateCell(0);
@@ -268,13 +268,13 @@ namespace AttendanceManagement
 
             // 出勤日時
             ICell workStartDateCell = row.CreateCell(2);
-            workStartDateCell.SetCellType(CellType.String);
-            workStartDateCell.SetCellValue(dr[2].ToString());
+            workStartDateCell.CellStyle = style;
+            workStartDateCell.SetCellValue(DateTime.Parse(workStartDate));
 
             // 退勤日時
             ICell workEndDateCell = row.CreateCell(3);
-            workEndDateCell.SetCellType(CellType.String);
-            workEndDateCell.SetCellValue(dr[3].ToString());
+            workEndDateCell.CellStyle = style;
+            workEndDateCell.SetCellValue(DateTime.Parse(workEndDate));
         }
 
         /// <summary>

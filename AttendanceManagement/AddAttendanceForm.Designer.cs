@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAttendanceForm));
             btnRegist = new Button();
             dtpWorkStartDate = new DateTimePicker();
             lblWorkStartDate = new Label();
@@ -121,6 +122,7 @@
             Controls.Add(dtpWorkEndDate);
             Controls.Add(dtpWorkStartDate);
             Controls.Add(btnRegist);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddAttendanceForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "勤怠手動登録";

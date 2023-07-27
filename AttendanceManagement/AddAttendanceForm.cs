@@ -84,6 +84,7 @@ namespace AttendanceManagement
         private void resetValidateInput()
         {
             epInput.SetError(dtpWorkStartDate, null);
+            epInput.SetError(dtpWorkEndDate, null);
         }
 
         /// <summary>
@@ -110,7 +111,7 @@ namespace AttendanceManagement
             }
             if (isIncludeRegistedAttendanceRange(employee_id, dtpWorkEndDate.Value))
             {
-                epInput.SetError(dtpWorkStartDate, "退勤日時が登録済みの勤務時間内になっています");
+                epInput.SetError(dtpWorkEndDate, "退勤日時が登録済みの勤務時間内になっています");
                 return false;
             }
 

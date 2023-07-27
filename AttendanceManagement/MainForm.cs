@@ -11,6 +11,11 @@ namespace AttendanceManagement
         /// </summary>
         private ConfigWrapper mConfiguration;
 
+        /// <summary>
+        /// アプリのバージョン
+        /// </summary>
+        const string APP_VERSION = "1.0";
+
         public MainForm()
         {
             InitializeComponent();
@@ -92,7 +97,7 @@ namespace AttendanceManagement
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            execDDL();
+            setupDatabase();
             initForm();
             loademployeesList();
         }
@@ -126,6 +131,18 @@ namespace AttendanceManagement
         #region "関数"
 
         /// <summary>
+        /// データベースを設定
+        /// </summary>
+        private void setupDatabase()
+        {
+            execDDL();
+            if (getDatabaseVersion() == "")
+            {
+                insertVersionRecord();
+            }
+        }
+
+        /// <summary>
         /// DDLを実行してテーブルを作成
         /// </summary>
         private void execDDL()
@@ -135,7 +152,7 @@ namespace AttendanceManagement
             /* アプリバージョンテーブル */
             db.ExecuteNonQuery(@"
                 CREATE TABLE IF NOT EXISTS version (
-	                 version INTEGER PRIMARY KEY
+	                 version TEXT PRIMARY KEY
 	                ,created_at TEXT
 	                ,updated_at TEXT
                 )");
@@ -164,12 +181,57 @@ namespace AttendanceManagement
         }
 
         /// <summary>
+        /// DBファイルのアプリバージョンを取得
+        /// </summary>
+        private string getDatabaseVersion()
+        {
+            var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
+            var dt = db.ExecuteQuery(@"
+                SELECT
+                    version
+                FROM
+                    version
+            ");
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return "";
+            }
+            return dt.Rows[0]["version"].ToString() ?? "";
+        }
+
+        /// <summary>
+        /// バージョン情報を更新
+        /// </summary>
+        private void insertVersionRecord()
+        {
+            var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
+
+            var param = new Dictionary<string, object>() { { "version", APP_VERSION } };
+            db.ExecuteNonQuery(@"
+                INSERT INTO version (version, created_at, updated_at)
+                VALUES ($version, datetime('now', 'localtime'), datetime('now', 'localtime'))
+            ", param);
+
+        }
+
+        /// <summary>
         /// フォームを初期化
         /// </summary>
         private void initForm()
         {
             displayClock();
             initemployeesListViewColumn();
+            displayVersion();
+        }
+
+        /// <summary>
+        /// バージョン情報を表示
+        /// </summary>
+        private void displayVersion()
+        {
+            var dbver = getDatabaseVersion();
+            var str = $"App Version {APP_VERSION}  DB Version {dbver}";
+            lblVersion.Text = str;
         }
 
         /// <summary>
@@ -281,7 +343,7 @@ namespace AttendanceManagement
         private void registAttendance(string id)
         {
             var db = new SQLiteADOWrapper(mConfiguration.getDBFilePath());
-            var param = new Dictionary<string, object>() { 
+            var param = new Dictionary<string, object>() {
                 { "employee_id", id },
             };
             var ret = db.ExecuteNonQuery(@"

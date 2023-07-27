@@ -40,6 +40,7 @@
             出力ToolStripMenuItem = new ToolStripMenuItem();
             tiUpdateClock = new System.Windows.Forms.Timer(components);
             lvemployees = new ListView();
+            lblVersion = new Label();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -141,11 +142,21 @@
             lvemployees.View = View.Details;
             lvemployees.SelectedIndexChanged += lvemployees_SelectedIndexChanged;
             // 
+            // lblVersion
+            // 
+            lblVersion.AutoSize = true;
+            lblVersion.Location = new Point(509, 403);
+            lblVersion.Name = "lblVersion";
+            lblVersion.Size = new Size(141, 15);
+            lblVersion.TabIndex = 8;
+            lblVersion.Text = "App Version:  DB Version: ";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(704, 412);
+            ClientSize = new Size(704, 424);
+            Controls.Add(lblVersion);
             Controls.Add(lvemployees);
             Controls.Add(label1);
             Controls.Add(lblCurrentTime);
@@ -176,5 +187,6 @@
         private ToolStripMenuItem 出力ToolStripMenuItem;
         private System.Windows.Forms.Timer tiUpdateClock;
         private ListView lvemployees;
+        private Label lblVersion;
     }
 }

@@ -68,6 +68,17 @@ namespace AttendanceManagement
         }
 
         /// <summary>
+        /// データフォルダメニューをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void データフォルダToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = mConfiguration.getDBDirPath();
+            System.Diagnostics.Process.Start("EXPLORER.EXE", path);
+        }
+
+        /// <summary>
         /// 出勤ボタンをクリック
         /// </summary>
         /// <param name="sender"></param>

@@ -9,9 +9,9 @@ namespace AttendanceManagement
     public class ConfigWrapper
     {
         /// <summary>
-        /// データベースファイルへのファイルパスが記述されている設定ファイル(App.config)のキー
+        /// データベースファイルのディレクトリへのファイルパスが記述されている設定ファイル(App.config)のキー
         /// </summary>
-        const string mAppSettingDatabaseFilePathKey = "DatabaseFilePath";
+        const string mAppSettingDatabaseFileDirPathKey = "DatabaseDirPath";
         
         /// <summary>
         /// デフォルトのデータベースディレクトリ名(%USERPROFILE%\AppData\Local以下のディレクトリ)
@@ -22,11 +22,6 @@ namespace AttendanceManagement
         /// デフォルトのデータベースディレクトリ名(%USERPROFILE%\AppData\Local\sigoto_soft以下のディレクトリ)
         /// </summary>
         const string mDefaultDatabaseFileDirProjectName = "AttendanceManagement";
-
-        /// <summary>
-        /// データベースファイルへのパス
-        /// </summary>
-        string mDatabaseFilePath = "";
 
         /// <summary>
         /// デフォルトのデータベースファイル名
@@ -48,27 +43,31 @@ namespace AttendanceManagement
         /// <returns></returns>
         public string getDBFilePath()
         {
-            if (mDatabaseFilePath != "")
-            {
-                return mDatabaseFilePath;
-            }
+            var dirPath = getDBDirPath();
+            var dbpath = Path.Combine(dirPath, mDefaultDatabaseFileName);
 
-            var dbpath = ConfigurationManager.AppSettings[mAppSettingDatabaseFilePathKey];
+            return dbpath;
+        }
+
+        /// <summary>
+        /// データベースファイルのディレクトリへのパスを取得する
+        /// </summary>
+        /// <returns></returns>
+        public string getDBDirPath()
+        {
+            var dbpath = ConfigurationManager.AppSettings[mAppSettingDatabaseFileDirPathKey];
             if (dbpath == null || dbpath == "")
             {
-                dbpath = initializeDBFilePath();
+                return defaultDBFilePath();
             }
-
-            mDatabaseFilePath = dbpath;
-
-            return mDatabaseFilePath;
+            return dbpath;
         }
 
         /// <summary>
         /// データベースファイルへのパス設定を初期化する
         /// </summary>
         /// <returns></returns>
-        private string initializeDBFilePath()
+        private string defaultDBFilePath()
         {
             // データベースファイルの保存先ディレクトリを作成
             var defaultDirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
@@ -76,15 +75,7 @@ namespace AttendanceManagement
                 mDefaultDatabaseFileDirProjectName);
             Directory.CreateDirectory(defaultDirPath);
 
-            // データベースファイルへのパスを作成
-            var dbpath = Path.Combine(defaultDirPath, mDefaultDatabaseFileName);
-
-            // 設定ファイルへ保存
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings[mAppSettingDatabaseFilePathKey].Value = dbpath;
-            config.Save();
-
-            return dbpath;
+            return defaultDirPath;
         }
     }
 }

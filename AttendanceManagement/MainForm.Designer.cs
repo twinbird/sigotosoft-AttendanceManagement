@@ -41,6 +41,7 @@
             tiUpdateClock = new System.Windows.Forms.Timer(components);
             lvemployees = new ListView();
             lblVersion = new Label();
+            データフォルダToolStripMenuItem = new ToolStripMenuItem();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -94,7 +95,7 @@
             // 
             // menuMain
             // 
-            menuMain.Items.AddRange(new ToolStripItem[] { 従業員設定ToolStripMenuItem, 勤怠履歴ToolStripMenuItem, 出力ToolStripMenuItem });
+            menuMain.Items.AddRange(new ToolStripItem[] { 従業員設定ToolStripMenuItem, 勤怠履歴ToolStripMenuItem, 出力ToolStripMenuItem, データフォルダToolStripMenuItem });
             menuMain.Location = new Point(0, 0);
             menuMain.Name = "menuMain";
             menuMain.Size = new Size(704, 24);
@@ -151,6 +152,13 @@
             lblVersion.TabIndex = 8;
             lblVersion.Text = "App Version:  DB Version: ";
             // 
+            // データフォルダToolStripMenuItem
+            // 
+            データフォルダToolStripMenuItem.Name = "データフォルダToolStripMenuItem";
+            データフォルダToolStripMenuItem.Size = new Size(80, 20);
+            データフォルダToolStripMenuItem.Text = "データフォルダ";
+            データフォルダToolStripMenuItem.Click += データフォルダToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -188,5 +196,6 @@
         private System.Windows.Forms.Timer tiUpdateClock;
         private ListView lvemployees;
         private Label lblVersion;
+        private ToolStripMenuItem データフォルダToolStripMenuItem;
     }
 }

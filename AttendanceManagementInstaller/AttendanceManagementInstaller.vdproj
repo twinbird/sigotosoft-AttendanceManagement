@@ -214,7 +214,7 @@
         "ARPCONTACT" = "8:sigoto-soft"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:https://www.sigoto-soft.com"
         "ARPPRODUCTICON" = "8:_256789BCF5B24F0B97F35C23B9BF78CE"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"

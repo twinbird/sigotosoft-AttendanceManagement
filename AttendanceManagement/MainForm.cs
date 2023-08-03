@@ -14,7 +14,7 @@ namespace AttendanceManagement
         /// <summary>
         /// アプリのバージョン
         /// </summary>
-        const string APP_VERSION = "1.0";
+        const string APP_VERSION = "1.0.1";
 
         public MainForm()
         {

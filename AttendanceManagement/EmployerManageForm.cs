@@ -251,6 +251,7 @@ namespace AttendanceManagement
             txtName.Text = "";
             txtMemo.Text = "";
             cbDisabled.Checked = false;
+            txtID.Enabled = true;
 
             resetValidateemployeeInfo();
         }
@@ -295,6 +296,7 @@ namespace AttendanceManagement
             {
                 cbDisabled.Checked = true;
             }
+            txtID.Enabled = false;
         }
 
         /// <summary>

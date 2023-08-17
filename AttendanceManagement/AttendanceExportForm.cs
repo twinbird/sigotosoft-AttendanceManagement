@@ -2,7 +2,7 @@
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Data;
-
+using System.Text;
 
 namespace AttendanceManagement
 {
@@ -180,7 +180,10 @@ namespace AttendanceManagement
             }
             var rows = rowsList;
             var csv = CsvWriter.WriteToText(columnNames, rows, ',');
-            File.WriteAllText(savepath, csv);
+
+            // Shift-JISを使えるようにする
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            File.WriteAllText(savepath, csv, Encoding.GetEncoding("shift_jis"));
         }
 
         /// <summary>
